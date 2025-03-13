@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Event MLBB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="step step-1">
+            <h2>Masukkan Nama Tim</h2>
+            <input type="text" id="teamName" placeholder="Nama Tim">
+            <p class="error hidden" id="errorTeamName">Silakan lengkapi field ini.</p>
+            <button id="next1">Next</button>
+        </div>
+
+        <div class="step step-2 hidden">
+            <h2>Daftar Anggota Tim</h2>
+            <div id="teamMembers"></div>
+            <p class="error hidden" id="errorMembers">Silakan lengkapi semua anggota tim.</p>
+            <button id="next2">Next</button>
+        </div>
+
+        <div class="step step-3 hidden">
+            <h2>Upload Logo Tim</h2>
+            <input type="file" id="teamLogo" accept="image/png, image/jpeg">
+            <p class="error hidden" id="errorLogo">Silakan unggah logo tim.</p>
+            <button id="submit">Daftarkan</button>
+        </div>
+
+        <div class="step step-4 hidden">
+            <h2>Terima Kasih!</h2>
+            <p>Pendaftaran berhasil!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
