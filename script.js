@@ -1,53 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let currentStep = 1;
+document.addEventListener("DOMContentLoaded", function () {
+    const step1 = document.querySelector(".step-1");
+    const step2 = document.querySelector(".step-2");
+    const step3 = document.querySelector(".step-3");
+    const step4 = document.querySelector(".step-4");
 
-    const next1 = document.getElementById("next1");
-    const next2 = document.getElementById("next2");
-    const submit = document.getElementById("submit");
+    const namaTim = document.getElementById("namaTim");
+    const errorNamaTim = document.getElementById("error-namaTim");
+    const nextBtn1 = document.getElementById("nextBtn1");
 
-    next1.addEventListener("click", () => {
-        const teamName = document.getElementById("teamName").value;
-        if (teamName.trim() === "") {
-            document.getElementById("teamNameError").textContent = "Silakan isi nama tim.";
+    const playerList = document.getElementById("playerList");
+    const nextBtn2 = document.getElementById("nextBtn2");
+    const errorPlayers = document.getElementById("error-players");
+
+    const logoTim = document.getElementById("logoTim");
+    const submitBtn = document.getElementById("submitBtn");
+    const errorLogoTim = document.getElementById("error-logoTim");
+
+    nextBtn1.addEventListener("click", function () {
+        if (namaTim.value.trim() === "") {
+            errorNamaTim.textContent = "Silakan isi nama tim!";
         } else {
-            document.getElementById("step1").style.display = "none";
-            document.getElementById("step2").style.display = "block";
+            step1.classList.add("hidden");
+            step2.classList.remove("hidden");
+            generatePlayerForm();
         }
     });
 
-    next2.addEventListener("click", () => {
-        document.getElementById("step2").style.display = "none";
-        document.getElementById("step3").style.display = "block";
+    function generatePlayerForm() {
+        playerList.innerHTML = "";
+        for (let i = 1; i <= 5; i++) {
+            playerList.innerHTML += `
+                <label>Nama Discord Player ${i}:</label>
+                <input type="text" id="dcPlayer${i}" placeholder="Nama Discord">
+                <label>Nama MLBB Player ${i}:</label>
+                <input type="text" id="mlbbPlayer${i}" placeholder="Nama MLBB">
+                <p class="error-message" id="error-dcPlayer${i}"></p>
+            `;
+        }
+    }
+
+    nextBtn2.addEventListener("click", function () {
+        step2.classList.add("hidden");
+        step3.classList.remove("hidden");
     });
 
-    submit.addEventListener("click", () => {
-        alert("Pendaftaran berhasil! Data akan dikirim ke Discord.");
-        document.getElementById("step3").style.display = "none";
-        document.getElementById("thankYou").style.display = "block";
+    submitBtn.addEventListener("click", function () {
+        const file = logoTim.files[0];
+        if (!file) {
+            errorLogoTim.textContent = "Silakan upload logo!";
+            return;
+        }
 
-        // Kirim data ke Discord menggunakan Webhook
-        sendToDiscord();
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("DISCORD_WEBHOOK_URL", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            step3.classList.add("hidden");
+            step4.classList.remove("hidden");
+        });
     });
 });
-
-function sendToDiscord() {
-    const webhookURL = "DISCORD_WEBHOOK_URL"; // Ganti dengan Webhook kamu
-
-    const teamName = document.getElementById("teamName").value;
-    const teamLogo = document.getElementById("teamLogo").files[0];
-
-    const formData = new FormData();
-    formData.append("content", `Pendaftaran Baru: ${teamName}`);
-    formData.append("file", teamLogo);
-
-    fetch(webhookURL, {
-        method: "POST",
-        body: formData,
-    }).then(response => {
-        if (response.ok) {
-            console.log("Data berhasil dikirim ke Discord!");
-        } else {
-            console.error("Gagal mengirim data ke Discord.");
-        }
-    });
-}

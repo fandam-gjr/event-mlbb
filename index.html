@@ -8,31 +8,31 @@
 </head>
 <body>
     <div class="container">
-        <h2>Pendaftaran Event MLBB</h2>
-        <form id="registrationForm">
-            <div id="step1" class="step">
-                <label for="teamName">Nama Tim:</label>
-                <input type="text" id="teamName" required>
-                <span class="error-message" id="teamNameError"></span>
-                <button type="button" id="next1">Next</button>
-            </div>
-            
-            <div id="step2" class="step" style="display: none;">
-                <h3>Daftar Pemain</h3>
-                <div id="players"></div>
-                <span class="error-message" id="playersError"></span>
-                <button type="button" id="next2">Next</button>
-            </div>
-            
-            <div id="step3" class="step" style="display: none;">
-                <label for="teamLogo">Upload Logo Tim (JPG/PNG):</label>
-                <input type="file" id="teamLogo" accept="image/png, image/jpeg">
-                <span class="error-message" id="logoError"></span>
-                <button type="button" id="submit">Daftarkan</button>
-            </div>
-        </form>
-        <div id="thankYou" style="display: none;">
-            <h3>Terima kasih! Pendaftaran berhasil.</h3>
+        <h1>Pendaftaran Event MLBB</h1>
+        <div class="step step-1">
+            <label for="namaTim">Nama Tim:</label>
+            <input type="text" id="namaTim" placeholder="Masukkan nama tim">
+            <p class="error-message" id="error-namaTim"></p>
+            <button id="nextBtn1">Next</button>
+        </div>
+
+        <div class="step step-2 hidden">
+            <h2>Data Pemain</h2>
+            <div id="playerList"></div>
+            <p class="error-message" id="error-players"></p>
+            <button id="nextBtn2">Next</button>
+        </div>
+
+        <div class="step step-3 hidden">
+            <label for="logoTim">Upload Logo (JPG/PNG):</label>
+            <input type="file" id="logoTim" accept="image/png, image/jpeg">
+            <p class="error-message" id="error-logoTim"></p>
+            <button id="submitBtn">Daftarkan</button>
+        </div>
+
+        <div class="step step-4 hidden">
+            <h2>Terima Kasih!</h2>
+            <p>Tim Anda telah berhasil didaftarkan.</p>
         </div>
     </div>
     <script src="script.js"></script>
