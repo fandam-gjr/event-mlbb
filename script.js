@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const teamLogo = document.getElementById("teamLogo");
     const errorLogo = document.getElementById("errorLogo");
 
+    // Buat input untuk 5 anggota
     for (let i = 1; i <= 5; i++) {
         const memberDiv = document.createElement("div");
         memberDiv.innerHTML = `<input type="text" placeholder="Nama Discord Anggota ${i}" class="member-dc">
@@ -48,41 +49,41 @@ document.addEventListener("DOMContentLoaded", function () {
             errorLogo.classList.remove("hidden");
         } else {
             errorLogo.classList.add("hidden");
+            document.querySelector(".step-3").classList.add("hidden");
+            document.querySelector(".step-4").classList.remove("hidden");
 
-            // **Kirim Data ke Discord Webhook**
-            const webhookURL = "https://discord.com/api/webhooks/1349853633453490267/PFA6gGfDnTCjOIaIkE3XlMl-Ps_vLR3W6EXGg7G80YBbBfd2JzeC_k5qMhNog5Uz7e_a"; // Ganti dengan Webhook milikmu!
-
-            let membersList = "";
-            memberDcInputs.forEach((input, index) => {
-                membersList += `**Anggota ${index + 1}:**\nDiscord: ${input.value}\nMLBB: ${memberMlbbInputs[index].value}\n\n`;
-            });
-
-            const payload = {
-                content: "**Pendaftaran Tim Baru!** 🎮",
-                embeds: [{
-                    title: "Detail Pendaftaran",
-                    description: `**Nama Tim:** ${teamName.value}\n\n${membersList}`,
-                    color: 3447003 // Warna biru Discord
-                }]
-            };
-
-            fetch(webhookURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.querySelector(".step-3").classList.add("hidden");
-                    document.querySelector(".step-4").classList.remove("hidden");
-                } else {
-                    alert("Gagal mengirim data ke Discord.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Terjadi kesalahan.");
-            });
+            // Kirim data ke Discord
+            sendToDiscord();
         }
     });
+
+    function sendToDiscord() {
+        const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // Ganti dengan webhook Discord
+
+        const teamData = {
+            content: "Pendaftaran Baru!",
+            embeds: [{
+                title: "Pendaftaran Event MLBB",
+                fields: [
+                    { name: "Nama Tim", value: teamName.value },
+                    ...Array.from(memberDcInputs).map((input, index) => (
+                        { name: `Anggota ${index + 1}`, value: `Discord: ${input.value} | MLBB: ${memberMlbbInputs[index].value}` }
+                    ))
+                ]
+            }]
+        };
+
+        fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(teamData)
+        }).then(response => {
+            if (response.ok) {
+                console.log("Data terkirim ke Discord");
+            } else {
+                console.error("Gagal mengirim ke Discord");
+            }
+        });
+    }
 });
+
