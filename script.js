@@ -44,7 +44,7 @@ function submitForm() {
 }
 
 function sendToDiscord() {
-    const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+    const webhookURL = "https://discord.com/api/webhooks/1349853633453490267/PFA6gGfDnTCjOIaIkE3XlMl-Ps_vLR3W6EXGg7G80YBbBfd2JzeC_k5qMhNog5Uz7e_a";
     let teamName = document.getElementById("teamName").value;
     let players = [];
     for (let i = 1; i <= 5; i++) {
