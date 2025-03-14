@@ -1,3 +1,4 @@
+/* styles.css */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -5,21 +6,50 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f4f4f4;
+    margin: 0;
 }
+
 .container {
+    width: 400px;
     background: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
-.hidden {
+
+.step {
     display: none;
 }
-.error-message {
+
+.step.active {
+    display: block;
+}
+
+input[type="text"], input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.warning {
     color: red;
-    font-size: 12px;
+    font-size: 14px;
     display: none;
 }
-.error-message.hidden {
-    display: none;
+
+button {
+    background: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #0056b3;
 }
