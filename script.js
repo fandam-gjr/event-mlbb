@@ -36,7 +36,7 @@ function submitForm() {
         return;
     }
 
-    const webhookURL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL";
+    const webhookURL = "https://discord.com/api/webhooks/https://discord.com/api/webhooks/1349853633453490267/PFA6gGfDnTCjOIaIkE3XlMl-Ps_vLR3W6EXGg7G80YBbBfd2JzeC_k5qMhNog5Uz7e_a";
     const formData = new FormData();
     formData.append("content", `📌 **Pendaftaran Baru**:\n\n🔹 **Nama Tim:** ${teamName}\n\n👥 **Anggota Tim:**\n${members.map(m => `- ${m.discord} (ID MLBB: ${m.mlbb})`).join('\n')}`);
     formData.append("file", logo);
