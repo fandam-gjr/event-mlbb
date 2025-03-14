@@ -9,25 +9,26 @@
 <body>
     <div class="container">
         <h1>Pendaftaran Event MLBB</h1>
+        
         <div class="step step-1">
             <label for="namaTim">Nama Tim:</label>
             <input type="text" id="namaTim" placeholder="Masukkan nama tim">
             <p class="error-message" id="error-namaTim"></p>
-            <button id="nextBtn1">Next</button>
+            <button id="nextBtn1" disabled>Next</button>
         </div>
 
         <div class="step step-2 hidden">
             <h2>Data Pemain</h2>
             <div id="playerList"></div>
             <p class="error-message" id="error-players"></p>
-            <button id="nextBtn2">Next</button>
+            <button id="nextBtn2" disabled>Next</button>
         </div>
 
         <div class="step step-3 hidden">
             <label for="logoTim">Upload Logo (JPG/PNG):</label>
             <input type="file" id="logoTim" accept="image/png, image/jpeg">
             <p class="error-message" id="error-logoTim"></p>
-            <button id="submitBtn">Daftarkan</button>
+            <button id="submitBtn" disabled>Daftarkan</button>
         </div>
 
         <div class="step step-4 hidden">
