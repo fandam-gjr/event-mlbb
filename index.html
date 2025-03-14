@@ -1,43 +1,42 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Event MLBB</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Form Pendaftaran Event MLBB</h2>
-        <div id="step1">
-            <input type="text" id="teamName" placeholder="Nama Tim">
-            <span class="error" id="teamError">Lengkapi terlebih dahulu</span>
-            <button onclick="nextStep(1)">Next</button>
-        </div>
-        
-        <div id="step2" style="display:none;">
-            <input type="text" id="player1" placeholder="Nama Discord & ID MLBB">
-            <input type="text" id="player2" placeholder="Nama Discord & ID MLBB">
-            <input type="text" id="player3" placeholder="Nama Discord & ID MLBB">
-            <input type="text" id="player4" placeholder="Nama Discord & ID MLBB">
-            <input type="text" id="player5" placeholder="Nama Discord & ID MLBB">
-            <span class="error" id="playersError">Lengkapi terlebih dahulu</span>
-            <button onclick="nextStep(2)">Next</button>
-        </div>
-        
-        <div id="step3" style="display:none;">
-            <input type="file" id="teamLogo" accept="image/png, image/jpeg">
-            <span class="error" id="logoError">Lengkapi terlebih dahulu</span>
-            <button onclick="submitForm()">Daftarkan</button>
-        </div>
-        
-        <div id="confirmation" style="display:none;">
-            <h3>Pendaftaran Berhasil!</h3>
-            <p>Terima kasih telah mendaftar.</p>
-        </div>
+<div class="container">
+    <!-- Step 1: Input Nama Tim -->
+    <div id="step-1" class="form-step">
+        <h2>Halaman 1: Input Nama Tim</h2>
+        <input type="text" id="team-name" placeholder="Masukkan Nama Tim">
+        <p class="error-message hidden" id="error-team-name">Lengkapi terlebih dahulu</p>
+        <button onclick="nextStep(2)">Next</button>
     </div>
-    
-    <script src="script.js"></script>
-</body>
-</html>
+
+    <!-- Step 2: Input Nama Anggota Tim -->
+    <div id="step-2" class="form-step hidden">
+        <h2>Halaman 2: Input Nama Anggota Tim</h2>
+        <div id="team-members">
+            <input type="text" class="member" placeholder="Nama Discord 1">
+            <input type="text" class="mlbb-id" placeholder="ID MLBB 1">
+            <input type="text" class="member" placeholder="Nama Discord 2">
+            <input type="text" class="mlbb-id" placeholder="ID MLBB 2">
+            <input type="text" class="member" placeholder="Nama Discord 3">
+            <input type="text" class="mlbb-id" placeholder="ID MLBB 3">
+            <input type="text" class="member" placeholder="Nama Discord 4">
+            <input type="text" class="mlbb-id" placeholder="ID MLBB 4">
+            <input type="text" class="member" placeholder="Nama Discord 5">
+            <input type="text" class="mlbb-id" placeholder="ID MLBB 5">
+        </div>
+        <p class="error-message hidden" id="error-team-members">Lengkapi terlebih dahulu</p>
+        <button onclick="nextStep(3)">Next</button>
+    </div>
+
+    <!-- Step 3: Upload Logo Tim -->
+    <div id="step-3" class="form-step hidden">
+        <h2>Halaman 3: Upload Logo Tim</h2>
+        <input type="file" id="team-logo" accept="image/png, image/jpeg">
+        <p class="error-message hidden" id="error-team-logo">Lengkapi terlebih dahulu</p>
+        <button onclick="submitForm()">Daftarkan</button>
+    </div>
+
+    <!-- Step 4: Pendaftaran Berhasil -->
+    <div id="step-4" class="form-step hidden">
+        <h2>Pendaftaran Berhasil!</h2>
+        <p>Terima kasih telah mendaftar!</p>
+    </div>
+</div>

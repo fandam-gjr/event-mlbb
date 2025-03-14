@@ -1,50 +1,25 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #282c34;
-    color: white;
-    margin: 0;
+    background-color: #f4f4f4;
 }
-
 .container {
-    background: #1e1e1e;
+    background: white;
     padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-input, button {
-    width: calc(100% - 20px);
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+.hidden {
+    display: none;
 }
-
-input {
-    background: #333;
-    color: white;
-}
-
-button {
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background: #0056b3;
-}
-
-.error {
+.error-message {
     color: red;
     font-size: 12px;
+    display: none;
+}
+.error-message.hidden {
     display: none;
 }

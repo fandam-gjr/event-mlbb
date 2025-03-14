@@ -1,68 +1,57 @@
-// script.js
-let currentStep = 1;
-
 function nextStep(step) {
-    if (step === 1) {
-        let teamName = document.getElementById("teamName").value;
-        if (!teamName) {
-            document.getElementById("teamError").style.display = "block";
-            return;
-        }
-        document.getElementById("teamError").style.display = "none";
-        document.getElementById("step1").style.display = "none";
-        document.getElementById("step2").style.display = "block";
-    } else if (step === 2) {
-        let players = [
-            document.getElementById("player1").value,
-            document.getElementById("player2").value,
-            document.getElementById("player3").value,
-            document.getElementById("player4").value,
-            document.getElementById("player5").value
-        ];
-        
-        if (players.some(player => !player)) {
-            document.getElementById("playersError").style.display = "block";
-            return;
-        }
-        document.getElementById("playersError").style.display = "none";
-        document.getElementById("step2").style.display = "none";
-        document.getElementById("step3").style.display = "block";
-    }
-}
+    const currentStep = document.querySelector('.form-step:not(.hidden)');
+    const inputs = currentStep.querySelectorAll('input');
+    let valid = true;
 
-function submitForm() {
-    let logo = document.getElementById("teamLogo").files[0];
-    if (!logo) {
-        document.getElementById("logoError").style.display = "block";
+    inputs.forEach(input => {
+        if (!input.value) {
+            valid = false;
+        }
+    });
+
+    if (!valid) {
+        currentStep.querySelector('.error-message').classList.remove('hidden');
         return;
     }
-    document.getElementById("logoError").style.display = "none";
-    document.getElementById("step3").style.display = "none";
-    document.getElementById("confirmation").style.display = "block";
-    
-    sendToDiscord();
-}
 
-function sendToDiscord() {
-    const webhookURL = "https://discord.com/api/webhooks/1349853633453490267/PFA6gGfDnTCjOIaIkE3XlMl-Ps_vLR3W6EXGg7G80YBbBfd2JzeC_k5qMhNog5Uz7e_a";
-    let teamName = document.getElementById("teamName").value;
-    let players = [];
-    for (let i = 1; i <= 5; i++) {
-        players.push(document.getElementById("player" + i).value);
+    currentStep.classList.add('hidden');
+    document.getElementById(`step-${step}`).classList.remove('hidden');
+}
+function submitForm() {
+    const teamName = document.getElementById('team-name').value;
+    const members = [];
+    const memberInputs = document.querySelectorAll('.member');
+    const mlbbIds = document.querySelectorAll('.mlbb-id');
+
+    for (let i = 0; i < memberInputs.length; i++) {
+        members.push({
+            discord: memberInputs[i].value,
+            mlbb: mlbbIds[i].value
+        });
     }
-    
-    let message = {
-        content: "New team registered!",
-        embeds: [{
-            title: `Tim: ${teamName}`,
-            description: `Anggota:\n${players.join("\n")}`,
-            color: 3447003
-        }]
-    };
-    
+
+    const logo = document.getElementById('team-logo').files[0];
+    if (!logo) {
+        document.getElementById('error-team-logo').classList.remove('hidden');
+        return;
+    }
+
+    const webhookURL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL";
+    const formData = new FormData();
+    formData.append("content", `📌 **Pendaftaran Baru**:\n\n🔹 **Nama Tim:** ${teamName}\n\n👥 **Anggota Tim:**\n${members.map(m => `- ${m.discord} (ID MLBB: ${m.mlbb})`).join('\n')}`);
+    formData.append("file", logo);
+
     fetch(webhookURL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(message)
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('hidden');
+        } else {
+            alert("⚠️ Gagal mengirim data ke Discord. Cek kembali webhook URL.");
+        }
+    }).catch(error => {
+        alert("❌ Terjadi kesalahan: " + error);
     });
 }
