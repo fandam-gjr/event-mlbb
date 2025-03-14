@@ -8,45 +8,42 @@
 </head>
 <body>
     <div class="container">
-        <form id="registrationForm">
-            <div class="step" id="step1">
-                <h2>Halaman 1: Input Nama Tim</h2>
-                <input type="text" id="teamName" placeholder="Masukkan Nama Tim">
-                <p class="warning" id="warningTeam">Lengkapi terlebih dahulu</p>
-                <button type="button" onclick="nextStep(1)">Next</button>
-            </div>
-            
-            <div class="step" id="step2">
-                <h2>Halaman 2: Input Nama Anggota Tim</h2>
-                <div class="player-inputs">
-                    <input type="text" class="discord" placeholder="Nama Discord 1">
-                    <input type="text" class="mlbb-id" placeholder="ID MLBB 1">
-                    <input type="text" class="discord" placeholder="Nama Discord 2">
-                    <input type="text" class="mlbb-id" placeholder="ID MLBB 2">
-                    <input type="text" class="discord" placeholder="Nama Discord 3">
-                    <input type="text" class="mlbb-id" placeholder="ID MLBB 3">
-                    <input type="text" class="discord" placeholder="Nama Discord 4">
-                    <input type="text" class="mlbb-id" placeholder="ID MLBB 4">
-                    <input type="text" class="discord" placeholder="Nama Discord 5">
-                    <input type="text" class="mlbb-id" placeholder="ID MLBB 5">
-                </div>
-                <p class="warning" id="warningPlayers">Lengkapi terlebih dahulu</p>
-                <button type="button" onclick="nextStep(2)">Next</button>
-            </div>
-            
-            <div class="step" id="step3">
-                <h2>Halaman 3: Upload Logo Tim</h2>
-                <input type="file" id="teamLogo" accept="image/png, image/jpeg">
-                <p class="warning" id="warningLogo">Lengkapi terlebih dahulu</p>
-                <button type="button" onclick="submitForm()">Daftarkan</button>
-            </div>
-            
-            <div class="step" id="step4">
-                <h2>Pendaftaran Berhasil!</h2>
-                <p>Terima kasih telah mendaftar!</p>
-            </div>
-        </form>
+        <div id="step1" class="step">
+            <h2>Nama Tim</h2>
+            <input type="text" id="namaTim" placeholder="Masukkan Nama Tim">
+            <p id="error-message" class="error-message"></p>
+            <button onclick="nextStep()">Next</button>
+        </div>
+
+        <div id="step2" class="step" style="display: none;">
+            <h2>Daftar Anggota Tim</h2>
+            <input type="text" id="dcKetua" placeholder="Nama Discord Ketua">
+            <input type="text" id="mlbbKetua" placeholder="Nama MLBB Ketua">
+            <input type="text" id="dc1" placeholder="Nama Discord Anggota 1">
+            <input type="text" id="mlbb1" placeholder="Nama MLBB Anggota 1">
+            <input type="text" id="dc2" placeholder="Nama Discord Anggota 2">
+            <input type="text" id="mlbb2" placeholder="Nama MLBB Anggota 2">
+            <input type="text" id="dc3" placeholder="Nama Discord Anggota 3">
+            <input type="text" id="mlbb3" placeholder="Nama MLBB Anggota 3">
+            <input type="text" id="dc4" placeholder="Nama Discord Anggota 4">
+            <input type="text" id="mlbb4" placeholder="Nama MLBB Anggota 4">
+            <p id="error-message" class="error-message"></p>
+            <button onclick="nextStep()">Next</button>
+        </div>
+
+        <div id="step3" class="step" style="display: none;">
+            <h2>Upload Logo Tim</h2>
+            <input type="file" id="logoUpload" accept="image/png, image/jpeg" onchange="uploadLogo(event)">
+            <img id="logoPreview" src="" alt="Pratinjau Logo" style="display: none; max-width: 200px;">
+            <p id="error-message" class="error-message"></p>
+            <button onclick="sendToDiscord()">Daftar</button>
+        </div>
+
+        <div id="step4" class="step" style="display: none;">
+            <h2>Terima Kasih!</h2>
+            <p>Pendaftaran berhasil dikirim. Semoga sukses dalam turnamen!</p>
+        </div>
     </div>
-    <script src="script.js"></script>
+    <script src="mlbb_event.js"></script>
 </body>
 </html>

@@ -1,55 +1,58 @@
 /* styles.css */
 body {
     font-family: Arial, sans-serif;
+    background: url('gaming-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
     margin: 0;
 }
 
 .container {
-    width: 400px;
-    background: white;
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
     text-align: center;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
 }
 
 .step {
     display: none;
 }
 
-.step.active {
+.step:first-child {
     display: block;
 }
 
-input[type="text"], input[type="file"] {
-    width: calc(100% - 20px);
+input {
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
-}
-
-.warning {
-    color: red;
-    font-size: 14px;
-    display: none;
+    text-align: center;
 }
 
 button {
-    background: #007BFF;
+    background: #ff4500;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #ff6500;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
 }
